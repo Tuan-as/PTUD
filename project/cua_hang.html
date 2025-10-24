@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Base - Cửa Hàng</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main-nav .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #1d1d1f;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav ul li a {
+            color: #1d1d1f;
+            font-size: 0.9rem;
+        }
+
+        .section-heading {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .section-heading h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 50px;
+        }
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #1d1d1f;
+            min-width: 80px;
+        }
+        .category-item .img-placeholder {
+            width: 60px;
+            height: 55px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #888;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .category-item span {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 450px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .product-card.is-light {
+            background-color: #ffffff;
+            color: #1d1d1f;
+        }
+
+        .product-card .subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff9f00;
+        }
+
+        .product-card h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 1.2rem;
+            flex-grow: 1;
+        }
+        
+        .product-card .product-image {
+            align-self: center;
+            margin-top: 30px;
+        }
+        
+        .support-section {
+            margin-top: 60px;
+        }
+        .support-section h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .support-section .section-subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .support-card {
+            background-color: #fff;
+            border-radius: 18px;
+            padding: 40px;
+            min-height: 350px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .support-card .card-subtitle {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+        }
+        .support-card h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 10px;
+            flex-grow: 1;
+        }
+        .support-card.is-gradient {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e0e5ec 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .features {
+            margin-top: 60px;
+        }
+        .features h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .features .section-subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .feature-card .icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .main-footer-wrapper {
+            background-color: #f5f5f7;
+            padding: 50px 0 30px 0;
+            border-top: 1px solid #ddd;
+            margin-top: 60px;
+            color: #555;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-col-1 h5 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 15px;
+        }
+
+        .footer-col-1 p {
+            margin-bottom: 8px;
+        }
+
+        .footer-col-1 .bct-logo {
+            width: 130px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-col-2 .hotline {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .footer-col-2 .time {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-buttons .btn {
+            border: 1px solid #1d1d1f;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-decoration: none;
+        }
+        
+        .footer-buttons .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+        }
+        
+        .footer-links h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 15px;
+        }
+
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .footer-links-grid a {
+            font-size: 13px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .footer-links-grid a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom-bar {
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .social-links a {
+            font-size: 1.2rem;
+            color: #1d1d1f;
+            text-decoration: none;
+        }
+
+        .lang-selector {
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">Logo Cửa Hàng</div>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Ưu đãi</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Hỗ trợ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="section-heading">
+            <h1>Tiêu đề Trang</h1>
+            <h2>Mô tả hoặc khẩu hiệu chung của cửa hàng.</h2>
+        </section>
+        
+        <section class="category-nav">
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 1</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 2</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 3</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 4</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 5</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="img-placeholder">(Ảnh)</div>
+                <span>Danh mục 6</span>
+            </a>
+        </section>
+
+        <section class="latest-products">
+            <h2 style="font-size: 2.5rem; font-weight: 600; margin-bottom: 20px;">Khối Sản Phẩm Nổi Bật.</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div>
+                        <p class="subtitle">NHÃN</p>
+                        <h3>Sản phẩm Nổi Bật A</h3>
+                        <p>Mô tả ngắn gọn về sản phẩm này.</p>
+                        <a href="#" style="color: #fff;">Mua ngay &gt;</a>
+                    </div>
+                </div>
+
+                <div class="product-card is-light">
+                    <div>
+                        <p class="subtitle" style="color: #c94c4c;">NHÃN KHÁC</p>
+                        <h3>Sản phẩm Nổi Bật B</h3>
+                        <p>Mô tả ngắn gọn về sản phẩm này.</p>
+                        <a href="#">Xem chi tiết &gt;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="support-section">
+            <h2>Khối Hỗ Trợ/Dịch Vụ.</h2>
+            <p class="section-subtitle">Mô tả tóm tắt phần dịch vụ/hỗ trợ.</p>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <p class="card-subtitle">TIÊU ĐỀ PHỤ</p>
+                    <h3>Dịch vụ 1 (Ví dụ: Tư vấn Chuyên gia).</h3>
+                    <a href="#">Tìm hiểu thêm &gt;</a>
+                </div>
+                
+                <div class="support-card is-gradient">
+                     <p class="card-subtitle">TIÊU ĐỀ PHỤ</p>
+                     <h3>Dịch vụ 2 (Ví dụ: Trung tâm Dịch vụ).</h3>
+                     <a href="#">Bắt đầu ngay &gt;</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+             <h2 style="font-size: 2.5rem; font-weight: 600; margin-bottom: 10px;">Lý do chọn chúng tôi.</h2>
+             <p class="section-subtitle">Giá trị cốt lõi của thương hiệu.</p>
+             
+             <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">💡</div>
+                    <h4>Tính năng 1.</h4>
+                    <p>Mô tả chi tiết về tính năng hoặc lợi ích này.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🌟</div>
+                    <h4>Tính năng 2.</h4>
+                    <p>Mô tả chi tiết về tính năng hoặc lợi ích này.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💖</div>
+                    <h4>Tính năng 3.</h4>
+                    <p>Mô tả chi tiết về tính năng hoặc lợi ích này.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h4>Tính năng 4.</h4>
+                    <p>Mô tả chi tiết về tính năng hoặc lợi ích này.</p>
+                </div>
+             </div>
+        </section>
+
+    </main>
+    
+    <footer class="main-footer-wrapper">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col-1">
+                    <h5>Tên Cửa Hàng</h5>
+                    <p>Thông tin pháp lý: TÊN CÔNG TY TNHH</p>
+                    <p>Mã số kinh doanh: XXXXXXXXXX</p>
+                    <p>Nơi cấp: Cơ quan cấp</p>
+                    <p>Địa chỉ: Địa chỉ công ty</p>
+                    <p>SĐT: (XXX) XXX XXXX</p>
+                    
+                    <img src="https://via.placeholder.com/130x40?text=BCT+Logo" alt="Logo Bộ Công Thương Placeholder" class="bct-logo">
+                    
+                    <p>© 2025. Tên Cửa Hàng. Mọi quyền được bảo lưu.</p>
+                </div>
+
+                <div class="footer-col-2">
+                    <h5 class="hotline">Hotline: XXXX XXXX</h5>
+                    <p class="time">Thời gian hoạt động: (Thứ 2 - Chủ nhật)</p>
+                    
+                    <div class="footer-buttons">
+                        <a href="#" class="btn">Nút liên hệ 1</a>
+                        <a href="#" class="btn">Nút liên hệ 2</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Chính sách & Điều khoản</h5>
+                        <div class="footer-links-grid">
+                            <a href="#">Chính sách 1</a>
+                            <a href="#">Chính sách 2</a>
+                            <a href="#">Điều khoản 1</a>
+                            <a href="#">Điều khoản 2</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <div class="social-links">
+                    <a href="#" title="Facebook">FB</a>
+                    <a href="#" title="Instagram">IG</a>
+                    <a href="#" title="YouTube">YT</a>
+                    <a href="#" title="TikTok">TK</a>
+                </div>
+                <div class="lang-selector">
+                    <span> NGÔN NGỮ </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
